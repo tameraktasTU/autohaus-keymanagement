@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <title>Overview</title>
+    <link rel="stylesheet" href="css/mystyles.css">
+</head>
+
+<body style="padding-bottom: 4rem">
+
+    <div id="infoView" class="container is-max-desktop px-5 pt-4">
+        <div class="content">
+            <h1 class="title is-1" id="welcomeMessage"></h1>
+            <h2 class="subtitle is-3">Informationen zum Schlüssel</h2>
+        </div>
+        <div class="box has-background-grey-lighter">
+            <div class="content">
+                <input class="input box" type="text" id="searchValue" placeholder="Schlüsselnummer">
+                <button class="button is-rounded is-primary" onclick="getKeyInformation()">Suchen</button>
+            </div>
+        </div>
+
+        <div class="box has-background-grey-lighter">
+            <div class="content is-medium">
+                <p id="besitzerKey">Keine Schlüsselsuche gestartet!</p>
+                <p id="keyID"></p>
+                <p id="hersteller"></p>
+                <p id="modell"></p>
+                <p id="FIN"></p>
+            </div>
+        </div>
+    </div>
+
+    <div id="keysView" class="container is-max-desktop px-5 pt-4 is-hidden">
+        <div class="content">
+            <h1 class="title is-1">Meine Schlüssel</h1>
+        </div>
+        <div id="myKeys"></div>
+    </div>
+
+    <nav class="navbar is-primary is-fixed-bottom ">
+        <div class="navbar-brand">
+            <a id="infoTab" onclick="switchView()" class="navbar-item is-expanded is-block has-text-centered">
+                <p class="is-size-5">Schlüssel Infos</p>
+            </a>
+            <a id="keysTab" onclick="switchView()" class="navbar-item is-expanded is-block has-text-centered">
+                <p class="is-size-5">Meine Schlüssel</p>
+            </a>
+        </div>
+    </nav>
+
+    <script src="js-sdk-0.11.1/dist/pocketbase.umd.js"></script>
+    <script src="js/scripts.js"></script>
+
+    <script>
+        checkLoginStatus();
+        getOwnerKeys();
+        getMitarbeiterName();
+    </script>
+
+</body>
+
+</html>
