@@ -1,4 +1,4 @@
-const url = "https://whitestone.pockethost.io"
+const url = "https://pocketbase.tameraktas.de/"
 const client = new PocketBase(url);
 var userID = localStorage.getItem("userID");
 var currentKey;
@@ -20,7 +20,7 @@ async function validateLogin() {
     var nutzername = document.getElementById("nutzername").value;
     var passwort = document.getElementById("passwort").value;
     if (!nutzername || !passwort) {
-        console.log("test");
+        console.log("Login invalid! Test");
     } else {
         const authData = await client.collection('users').authWithPassword(nutzername, passwort);
         localStorage.setItem("userID", client.authStore.model.id);
@@ -89,10 +89,6 @@ async function getOwnerKeys() {
     });
     ownKeys = data;
     displayOwnKeys()
-}
-
-async function transferKey() {
-
 }
 
 function switchView() {
