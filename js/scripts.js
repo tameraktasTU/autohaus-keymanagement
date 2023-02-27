@@ -1,6 +1,5 @@
 const url = "https://pocketbase.tameraktas.de/"
 const client = new PocketBase(url);
-var userID = localStorage.getItem("userID");
 var currentKey;
 var ownKeys;
 
@@ -23,13 +22,12 @@ async function validateLogin() {
         console.log("Login invalid! Test");
     } else {
         const authData = await client.collection('users').authWithPassword(nutzername, passwort);
-        localStorage.setItem("userID", client.authStore.model.id);
         location.href = "overview.html";
     }
 }
 
 async function getMitarbeiterName() {
-    let data = await client.collection("users").getOne(userID);
+    let data = await client.collection("users").getOne(client.authStore.model.id);
     document.getElementById("welcomeMessage").innerHTML = "Hey " + data.firstName;
 }
 
@@ -83,7 +81,7 @@ function displayOwnKeys() {
 }
 
 async function getOwnerKeys() {
-    let searchQuery = "keyOwner = '" + userID + "'";
+    let searchQuery = "keyOwner = '" + client.authStore.model.id + "'";
     let data = await client.collection("keys").getFullList(200, {
         filter: searchQuery,
     });
