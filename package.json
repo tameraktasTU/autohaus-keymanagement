@@ -1,7 +1,7 @@
 {
-  "name": "pocketbase-test",
+  "name": "autohaus-keymanagement",
   "version": "1.0.0",
-  "main": "scripts.js",
+  "main": "index.html",
   "scripts": {
     "css-build": "node-sass --omit-source-map-url sass/mystyles.scss css/mystyles.css",
     "css-watch": "npm run css-build -- --watch",
@@ -9,10 +9,15 @@
   },
   "author": "Tamer Aktas",
   "license": "ISC",
-  "description": "",
-  "dependencies": {
-    "pocketbase": "^0.11.1"
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tameraktasTU/autohaus-keymanagement.git"
   },
+  "bugs": {
+    "url": "https://github.com/tameraktasTU/autohaus-keymanagement/issues"
+  },
+  "homepage": "https://github.com/tameraktasTU/autohaus-keymanagement#readme",
+  "description": "",
   "devDependencies": {
     "bulma": "^0.9.4",
     "node-sass": "^8.0.0"
