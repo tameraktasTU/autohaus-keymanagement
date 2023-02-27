@@ -26,9 +26,8 @@ async function validateLogin() {
     }
 }
 
-async function getMitarbeiterName() {
-    let data = await client.collection("users").getOne(client.authStore.model.id);
-    document.getElementById("welcomeMessage").innerHTML = "Hey " + data.firstName;
+async function setMitarbeiterName() {
+    document.getElementById("welcomeMessage").innerHTML = "Hey " + client.authStore.model.firstName;
 }
 
 async function getKeyInformation() {
