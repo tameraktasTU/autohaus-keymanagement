@@ -1,5 +1,6 @@
 const url = "https://pocketbase.tameraktas.de/"
 const client = new PocketBase(url);
+var transferButton = document.getElementById("transferButton");
 var currentKey;
 var ownKeys;
 
@@ -30,12 +31,51 @@ async function setMitarbeiterName() {
     document.getElementById("welcomeMessage").innerHTML = "Hey " + client.authStore.model.firstName;
 }
 
+async function getOwnerKeys() {
+    let searchQuery = "keyOwner = '" + client.authStore.model.id + "'";
+    let data = await client.collection("keys").getFullList(200, {
+        filter: searchQuery,
+    });
+    ownKeys = data;
+    displayOwnKeys()
+}
+
 async function getKeyInformation() {
     let searchValue = document.getElementById("searchValue").value;
     let searchQuery = "keyNumber=" + searchValue;
-    let data = await client.collection("keys").getFirstListItem(searchQuery);
-    currentKey = data;
+    try {
+        let data = await client.collection("keys").getFirstListItem(searchQuery);
+        currentKey = data;
+        displaySearchedKey();
+        showTransferButtons()
+    } catch (error) {
+        console.log("Fehler bei Keysuche");
+    }
+}
+
+async function showTransferButtons() {
+    for (let i = 0; i < ownKeys.length; i++) {
+        if (ownKeys[i].keyNumber == currentKey.keyNumber) {
+            transferButton.innerHTML = "Rückgabe";
+            transferButton.classList.remove("is-hidden");
+            transferButton.onclick = function () { updateKeyOwner("k1cc8v1cu2measz"); };
+            break;
+        } else {
+            transferButton.innerHTML = "Zuweisen";
+            transferButton.classList.remove("is-hidden");
+            transferButton.onclick = function () { updateKeyOwner(client.authStore.model.id); };
+        }
+    }
+}
+
+async function updateKeyOwner(newOwner) {
+    let data = {
+        "keyOwner": newOwner
+    }
+    await client.collection("keys").update(currentKey.id, data);
+    await getOwnerKeys();
     displaySearchedKey();
+    showTransferButtons();
 }
 
 async function displaySearchedKey() {
@@ -77,15 +117,6 @@ function displayOwnKeys() {
         newDiv.appendChild(newP4);
         parentElement.appendChild(newDiv);
     }
-}
-
-async function getOwnerKeys() {
-    let searchQuery = "keyOwner = '" + client.authStore.model.id + "'";
-    let data = await client.collection("keys").getFullList(200, {
-        filter: searchQuery,
-    });
-    ownKeys = data;
-    displayOwnKeys()
 }
 
 function switchView() {
