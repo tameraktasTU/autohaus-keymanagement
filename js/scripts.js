@@ -34,7 +34,7 @@ async function setMitarbeiterName() {
 
 async function getOwnerKeys() {
     let searchQuery = "keyOwner = '" + client.authStore.model.id + "'";
-    let data = await client.collection("keys").getFullList(200, {
+    let data = await client.collection("keys").getFullList({
         filter: searchQuery,
     });
     ownKeys = data;
@@ -120,7 +120,7 @@ function displayOwnKeys() {
     }
 }
 
-async function loadFahrten() {
+async function getOwnFahrten() {
     let searchQuery = "fahrer = '" + client.authStore.model.id + "'";
     let data = await client.collection('fahrten').getFullList(200, {
         searchQuery
@@ -162,27 +162,37 @@ function displayOwnFahrten() {
 function displayKeysPage() {
     if (document.getElementById("keysView").classList.contains("is-hidden")) {
         checkLoginStatus();
+        getOwnerKeys();
+        document.getElementById("keysTab").classList.add("is-active");
         document.getElementById("fahrtenView").classList.add("is-hidden");
         document.getElementById("infoView").classList.add("is-hidden");
         document.getElementById("keysView").classList.remove("is-hidden");
+        document.getElementById("infoTab").classList.remove("is-active");
+        document.getElementById("fahrtenTab").classList.remove("is-active");
     }
 }
 
 function displayInfoPage() {
     if (document.getElementById("infoView").classList.contains("is-hidden")) {
         checkLoginStatus();
+        document.getElementById("infoTab").classList.add("is-active");
         document.getElementById("fahrtenView").classList.add("is-hidden");
         document.getElementById("keysView").classList.add("is-hidden");
         document.getElementById("infoView").classList.remove("is-hidden");
+        document.getElementById("keysTab").classList.remove("is-active");
+        document.getElementById("fahrtenTab").classList.remove("is-active");
     }
 }
 
 function displayFahrtenPage() {
     if (document.getElementById("fahrtenView").classList.contains("is-hidden")) {
         checkLoginStatus();
-        loadFahrten();
+        getOwnFahrten();
+        document.getElementById("fahrtenTab").classList.add("is-active");
         document.getElementById("infoView").classList.add("is-hidden");
         document.getElementById("keysView").classList.add("is-hidden");
         document.getElementById("fahrtenView").classList.remove("is-hidden");
+        document.getElementById("infoTab").classList.remove("is-active");
+        document.getElementById("keysTab").classList.remove("is-active");
     }
 }

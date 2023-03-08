@@ -46,7 +46,7 @@
 
     <div id="fahrtenView" class="container is-max-desktop px-5 pt-4 is-hidden">
         <div class="content">
-            <h1 class="title is-1">Deine Fahrten</h1>
+            <h1 class="title is-1">Meine Fahrten</h1>
             <h2 class="subtitle is-3">Falls nötig</h2>
         </div>
         <div id="myFahrten"></div>
@@ -54,14 +54,16 @@
 
     <nav class="navbar is-transparent is-fixed-bottom noSelect">
         <div class="navbar-brand">
-            <div id="infoTab" onclick="displayInfoPage()" class="navbar-item is-expanded is-block has-text-centered">
+            <div id="infoTab" onclick="displayInfoPage()"
+                class="navbar-item is-tab is-expanded is-block has-text-centered">
                 <p class="is-size-5">Home</p>
             </div>
-            <div id="keysTab" onclick="displayKeysPage()" class="navbar-item is-expanded is-block has-text-centered">
+            <div id="keysTab" onclick="displayKeysPage()"
+                class="navbar-item is-tab is-expanded is-block has-text-centered">
                 <p class="is-size-5">Schlüssel</p>
             </div>
             <div id="fahrtenTab" onclick="displayFahrtenPage()"
-                class="navbar-item is-expanded is-block has-text-centered">
+                class="navbar-item is-tab is-expanded is-block has-text-centered">
                 <p class="is-size-5">Fahrten</p>
             </div>
         </div>
