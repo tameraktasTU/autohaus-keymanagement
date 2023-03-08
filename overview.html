@@ -45,14 +45,26 @@
         <div id="myKeys"></div>
     </div>
 
+    <div id="fahrtenView" class="container is-max-desktop px-5 pt-4 is-hidden">
+        <div class="content">
+            <h1 class="title is-1">Deine Fahrten</h1>
+            <h2 class="subtitle is-3">Falls nötig</h2>
+        </div>
+        <div id="myFahrten"></div>
+    </div>
+
     <nav class="navbar is-transparent is-fixed-bottom noSelect">
         <div class="navbar-brand">
-            <a id="infoTab" onclick="switchView()" class="navbar-item is-expanded is-block has-text-centered">
+            <div id="infoTab" onclick="displayInfoPage()" class="navbar-item is-expanded is-block has-text-centered">
                 <p class="is-size-5">Schlüssel Infos</p>
-            </a>
-            <a id="keysTab" onclick="switchView()" class="navbar-item is-expanded is-block has-text-centered">
+            </div>
+            <div id="keysTab" onclick="displayKeysPage()" class="navbar-item is-expanded is-block has-text-centered">
                 <p class="is-size-5">Meine Schlüssel</p>
-            </a>
+            </div>
+            <div id="fahrtenTab" onclick="displayFahrtenPage()"
+                class="navbar-item is-expanded is-block has-text-centered">
+                <p class="is-size-5">Fahrten</p>
+            </div>
         </div>
     </nav>
 
