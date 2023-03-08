@@ -162,24 +162,18 @@ function displayOwnFahrten() {
 function displayKeysPage() {
     if (document.getElementById("keysView").classList.contains("is-hidden")) {
         checkLoginStatus();
-        document.getElementById("fahrtenView").classList.remove("is-active")
-        document.getElementById("infoView").classList.remove("is-active");
-        document.getElementById("fahrtenView").classList.add("is-hidden")
+        document.getElementById("fahrtenView").classList.add("is-hidden");
         document.getElementById("infoView").classList.add("is-hidden");
         document.getElementById("keysView").classList.remove("is-hidden");
-        document.getElementById("keysView").classList.add("is-active");
     }
 }
 
 function displayInfoPage() {
     if (document.getElementById("infoView").classList.contains("is-hidden")) {
         checkLoginStatus();
-        document.getElementById("fahrtenView").classList.remove("is-active")
-        document.getElementById("keysView").classList.remove("is-active");
-        document.getElementById("fahrtenView").classList.add("is-hidden")
+        document.getElementById("fahrtenView").classList.add("is-hidden");
         document.getElementById("keysView").classList.add("is-hidden");
         document.getElementById("infoView").classList.remove("is-hidden");
-        document.getElementById("infoView").classList.add("is-active");
     }
 }
 
@@ -187,11 +181,8 @@ function displayFahrtenPage() {
     if (document.getElementById("fahrtenView").classList.contains("is-hidden")) {
         checkLoginStatus();
         loadFahrten();
-        document.getElementById("infoView").classList.remove("is-active")
-        document.getElementById("keysView").classList.remove("is-active");
-        document.getElementById("infoView").classList.add("is-hidden")
+        document.getElementById("infoView").classList.add("is-hidden");
         document.getElementById("keysView").classList.add("is-hidden");
         document.getElementById("fahrtenView").classList.remove("is-hidden");
-        document.getElementById("fahrtenView").classList.add("is-active");
     }
 }
