@@ -159,40 +159,49 @@ function displayOwnFahrten() {
     }
 }
 
+// Display functions for App-Bar
+
+var keysTab = document.getElementById("keysTab");
+var keysView = document.getElementById("keysView");
+var infoTab = document.getElementById("infoTab")
+var infoView = document.getElementById("infoView");
+var fahrtenTab = document.getElementById("fahrtenTab");
+var fahrtenView = document.getElementById("fahrtenView");
+
 function displayKeysPage() {
-    if (document.getElementById("keysView").classList.contains("is-hidden")) {
+    if (keysView.classList.contains("is-hidden")) {
         checkLoginStatus();
         getOwnerKeys();
-        document.getElementById("keysTab").classList.add("is-active");
-        document.getElementById("fahrtenView").classList.add("is-hidden");
-        document.getElementById("infoView").classList.add("is-hidden");
-        document.getElementById("keysView").classList.remove("is-hidden");
-        document.getElementById("infoTab").classList.remove("is-active");
-        document.getElementById("fahrtenTab").classList.remove("is-active");
+        keysTab.classList.add("is-active");
+        fahrtenView.classList.add("is-hidden");
+        infoView.classList.add("is-hidden");
+        keysView.classList.remove("is-hidden");
+        infoTab.classList.remove("is-active");
+        fahrtenTab.classList.remove("is-active");
     }
 }
 
 function displayInfoPage() {
-    if (document.getElementById("infoView").classList.contains("is-hidden")) {
+    if (infoView.classList.contains("is-hidden")) {
         checkLoginStatus();
-        document.getElementById("infoTab").classList.add("is-active");
-        document.getElementById("fahrtenView").classList.add("is-hidden");
-        document.getElementById("keysView").classList.add("is-hidden");
-        document.getElementById("infoView").classList.remove("is-hidden");
-        document.getElementById("keysTab").classList.remove("is-active");
-        document.getElementById("fahrtenTab").classList.remove("is-active");
+        infoTab.classList.add("is-active");
+        fahrtenView.classList.add("is-hidden");
+        keysView.classList.add("is-hidden");
+        infoView.classList.remove("is-hidden");
+        keysTab.classList.remove("is-active");
+        fahrtenTab.classList.remove("is-active");
     }
 }
 
 function displayFahrtenPage() {
-    if (document.getElementById("fahrtenView").classList.contains("is-hidden")) {
+    if (fahrtenView.classList.contains("is-hidden")) {
         checkLoginStatus();
         getOwnFahrten();
-        document.getElementById("fahrtenTab").classList.add("is-active");
-        document.getElementById("infoView").classList.add("is-hidden");
-        document.getElementById("keysView").classList.add("is-hidden");
-        document.getElementById("fahrtenView").classList.remove("is-hidden");
-        document.getElementById("infoTab").classList.remove("is-active");
-        document.getElementById("keysTab").classList.remove("is-active");
+        fahrtenTab.classList.add("is-active");
+        infoView.classList.add("is-hidden");
+        keysView.classList.add("is-hidden");
+        fahrtenView.classList.remove("is-hidden");
+        infoTab.classList.remove("is-active");
+        keysTab.classList.remove("is-active");
     }
 }
