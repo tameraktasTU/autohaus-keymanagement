@@ -133,11 +133,27 @@ function displayOwnFahrten() {
     const parentElement = document.getElementById("myFahrten");
     parentElement.innerHTML = "";
     for (let i = 0; i < ownFahrten.length; i++) {
-
+        let status;
         const datum = new Date(ownFahrten[i].datum);
 
         const newDiv = document.createElement("div");
         newDiv.classList.add("box", "has-background-grey-lighter");
+
+        switch (ownFahrten[i].status) {
+            case "Abgeschlossen":
+                status = "Abgeschlossen";
+                break;
+            case "Aktuell":
+                status = "Aktuell";
+                break;
+            case "Geplant":
+                status = "Geplant";
+                break;
+        }
+
+        const newSpan = document.createElement("span");
+        newSpan.classList.add("tag", "is-primary", "is-rounded");
+        newSpan.innerHTML = status;
 
         const newP1 = document.createElement("p");
         newP1.classList.add("is-size-6")
@@ -146,15 +162,15 @@ function displayOwnFahrten() {
         const newP3 = document.createElement("p");
         newP3.classList.add("is-size-5");
 
-        const newP4 = document.createElement("p");
         newP1.textContent = datum.toLocaleDateString("de-DE");
         newP2.textContent = ownFahrten[i].abfahrtsOrt + " > " + ownFahrten[i].ankunftsOrt;
         newP3.textContent = ownFahrten[i].kennzeichen + " | " + ownFahrten[i].distanz + "km";
         //newP4.textContent = "FIN: " + ownFahrten[i].fin;
+
+        newDiv.appendChild(newSpan);
         newDiv.appendChild(newP1);
         newDiv.appendChild(newP2);
         newDiv.appendChild(newP3);
-        //newDiv.appendChild(newP4);
         parentElement.appendChild(newDiv);
     }
 }
