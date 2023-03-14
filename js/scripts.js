@@ -122,8 +122,8 @@ function displayOwnKeys() {
 
 async function getOwnFahrten() {
     let searchQuery = "fahrer = '" + client.authStore.model.id + "'";
-    let data = await client.collection('fahrten').getFullList(200, {
-        searchQuery
+    let data = await client.collection('fahrten').getFullList({
+        filter: searchQuery
     });
     ownFahrten = data;
     displayOwnFahrten();
