@@ -132,8 +132,10 @@ async function getOwnFahrten() {
 function displayOwnFahrten() {
     const parentElement = document.getElementById("myFahrten");
     parentElement.innerHTML = "";
+
     for (let i = 0; i < ownFahrten.length; i++) {
         let status;
+        let color;
         const datum = new Date(ownFahrten[i].datum);
 
         const newDiv = document.createElement("div");
@@ -142,17 +144,21 @@ function displayOwnFahrten() {
         switch (ownFahrten[i].status) {
             case "Abgeschlossen":
                 status = "Abgeschlossen";
+                color = "is-info"
                 break;
             case "Aktuell":
                 status = "Aktuell";
+                color = "is-primary"
                 break;
             case "Geplant":
                 status = "Geplant";
+                color = "is-link"
                 break;
         }
 
         const newSpan = document.createElement("span");
-        newSpan.classList.add("tag", "is-primary", "is-rounded");
+        newSpan.classList.add("tag", "is-primary", "is-rounded", color);
+        newSpan.style.cssFloat = "right";
         newSpan.innerHTML = status;
 
         const newP1 = document.createElement("p");
