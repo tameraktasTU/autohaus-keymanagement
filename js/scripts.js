@@ -18,8 +18,8 @@ async function checkAlreadyLoggedIn() {
 }
 
 async function validateLogin() {
-    var nutzername = document.getElementById("nutzername").value;
-    var passwort = document.getElementById("passwort").value;
+    const nutzername = document.getElementById("nutzername").value;
+    const passwort = document.getElementById("passwort").value;
     if (!nutzername || !passwort) {
         console.log("Login invalid! Test");
     } else {
@@ -33,8 +33,8 @@ async function setMitarbeiterName() {
 }
 
 async function getOwnerKeys() {
-    let searchQuery = "keyOwner = '" + client.authStore.model.id + "'";
-    let data = await client.collection("keys").getFullList({
+    const searchQuery = "keyOwner = '" + client.authStore.model.id + "'";
+    const data = await client.collection("keys").getFullList({
         filter: searchQuery,
     });
     ownKeys = data;
@@ -42,8 +42,8 @@ async function getOwnerKeys() {
 }
 
 async function getKeyInformation() {
-    let searchValue = document.getElementById("searchValue").value;
-    let searchQuery = "keyNumber=" + searchValue;
+    const searchValue = document.getElementById("searchValue").value;
+    const searchQuery = "keyNumber=" + searchValue;
     try {
         let data = await client.collection("keys").getFirstListItem(searchQuery);
         currentKey = data;
@@ -70,7 +70,7 @@ async function showTransferButtons() {
 }
 
 async function updateKeyOwner(newOwner) {
-    let data = {
+    const data = {
         "keyOwner": newOwner
     }
     await client.collection("keys").update(currentKey.id, data);
@@ -90,7 +90,7 @@ async function displaySearchedKey() {
 async function checkOwnerKey() {
     for (let i = 0; i < ownKeys.length; i++) {
         if (ownKeys[i].keyNumber == currentKey.keyNumber) {
-            document.getElementById("besitzerKey").innerHTML = "Du bist Besitzer dieses Schlüssels!";
+            document.getElementById("besitzerKey").innerHTML = "Du bist Besitzer des Schlüssels!";
             break;
         } else {
             document.getElementById("besitzerKey").innerHTML = "Der Schlüssel gehört nicht dir!"
@@ -121,8 +121,8 @@ function displayOwnKeys() {
 }
 
 async function getOwnFahrten() {
-    let searchQuery = "fahrer = '" + client.authStore.model.id + "'";
-    let data = await client.collection('fahrten').getFullList({
+    const searchQuery = "fahrer = '" + client.authStore.model.id + "'";
+    const data = await client.collection('fahrten').getFullList({
         filter: searchQuery
     });
     ownFahrten = data;
