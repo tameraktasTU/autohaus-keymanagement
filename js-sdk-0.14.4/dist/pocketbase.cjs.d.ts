@@ -30,10 +30,6 @@ declare abstract class BaseModel {
         [key: string]: any;
     }): void;
     /**
-     * Alias of this.$isNew.
-     */
-    get isNew(): boolean;
-    /**
      * Returns whether the current loaded data represent a stored db record.
      */
     get $isNew(): boolean;
@@ -521,6 +517,12 @@ interface OAuth2AuthConfig {
     };
     // optional callback that is triggered after the OAuth2 sign-in/sign-up url generation
     urlCallback?: OAuth2UrlCallback;
+    // optional query params to send with the PocketBase auth request (eg. fields, expand, etc.)
+    query?: RecordQueryParams;
+    // optional body params to send with the PocketBase auth request
+    body?: {
+        [key: string]: any;
+    };
 }
 declare class RecordService extends CrudService<Record> {
     readonly collectionIdOrName: string;
@@ -875,7 +877,7 @@ interface SendOptions extends RequestInit {
     params?: BaseQueryParams;
 }
 interface BeforeSendResult {
-    [key: string]: any; // for backward compatibility
+    [key: string]: any;
     url?: string;
     options?: {
         [key: string]: any;
@@ -978,7 +980,16 @@ declare class Client {
      * @param  {string} idOrName
      * @return {RecordService}
      */
+    /**
+     * Returns the RecordService associated to the specified collection.
+     *
+     * @param  {string} idOrName
+     * @return {RecordService}
+     */
     collection(idOrName: string): RecordService;
+    /**
+     * Globally enable or disable auto cancellation for pending duplicated requests.
+     */
     /**
      * Globally enable or disable auto cancellation for pending duplicated requests.
      */
@@ -986,7 +997,13 @@ declare class Client {
     /**
      * Cancels single request by its cancellation key.
      */
+    /**
+     * Cancels single request by its cancellation key.
+     */
     cancelRequest(cancelKey: string): Client;
+    /**
+     * Cancels all pending requests.
+     */
     /**
      * Cancels all pending requests.
      */
@@ -994,7 +1011,13 @@ declare class Client {
     /**
      * Sends an api http request.
      */
+    /**
+     * Sends an api http request.
+     */
     send<T = any>(path: string, reqOptions: SendOptions): Promise<T>;
+    /**
+     * Legacy alias of `pb.files.getUrl()`.
+     */
     /**
      * Legacy alias of `pb.files.getUrl()`.
      */
@@ -1002,7 +1025,13 @@ declare class Client {
     /**
      * Builds a full client url by safely concatenating the provided path.
      */
+    /**
+     * Builds a full client url by safely concatenating the provided path.
+     */
     buildUrl(path: string): string;
+    /**
+     * Loosely checks if the specified body is a FormData instance.
+     */
     /**
      * Loosely checks if the specified body is a FormData instance.
      */
@@ -1010,88 +1039,9 @@ declare class Client {
     /**
      * Serializes the provided query parameters into a query string.
      */
+    /**
+     * Serializes the provided query parameters into a query string.
+     */
     private serializeQueryParams;
 }
-/**
- * ClientResponseError is a custom Error class that is intended to wrap
- * and normalize any error thrown by `Client.send()`.
- */
-declare class ClientResponseError extends Error {
-    url: string;
-    status: number;
-    response: {
-        [key: string]: any;
-    };
-    isAbort: boolean;
-    originalError: any;
-    constructor(errData?: any);
-    /**
-     * Alias for `this.response` to preserve the backward compatibility.
-     */
-    get data(): {
-        [key: string]: any;
-    };
-    /**
-     * Make a POJO's copy of the current error class instance.
-     * @see https://github.com/vuex-orm/vuex-orm/issues/255
-     */
-    toJSON(): this;
-}
-/**
- * The default token store for browsers with auto fallback
- * to runtime/memory if local storage is undefined (eg. in node env).
- */
-declare class LocalAuthStore extends BaseAuthStore {
-    private storageFallback;
-    private storageKey;
-    constructor(storageKey?: string);
-    /**
-     * @inheritdoc
-     */
-    get token(): string;
-    /**
-     * @inheritdoc
-     */
-    get model(): Record | Admin | null;
-    /**
-     * @inheritdoc
-     */
-    save(token: string, model: Record | Admin | null): void;
-    /**
-     * @inheritdoc
-     */
-    clear(): void;
-    // ---------------------------------------------------------------
-    // Internal helpers:
-    // ---------------------------------------------------------------
-    /**
-     * Retrieves `key` from the browser's local storage
-     * (or runtime/memory if local storage is undefined).
-     */
-    private _storageGet;
-    /**
-     * Stores a new data in the browser's local storage
-     * (or runtime/memory if local storage is undefined).
-     */
-    private _storageSet;
-    /**
-     * Removes `key` from the browser's local storage and the runtime/memory.
-     */
-    private _storageRemove;
-}
-/**
- * Returns JWT token's payload data.
- */
-declare function getTokenPayload(token: string): {
-    [key: string]: any;
-};
-/**
- * Checks whether a JWT token is expired or not.
- * Tokens without `exp` payload key are considered valid.
- * Tokens with empty payload (eg. invalid token strings) are considered expired.
- *
- * @param token The token to check.
- * @param [expirationThreshold] Time in seconds that will be subtracted from the token `exp` property.
- */
-declare function isTokenExpired(token: string, expirationThreshold?: number): boolean;
-export { Client as default, ClientResponseError, BaseAuthStore, LocalAuthStore, getTokenPayload, isTokenExpired, ExternalAuth, Admin, Collection, Record, LogRequest, BaseModel, ListResult, SchemaField, CrudService, AdminService, CollectionService, LogService, RealtimeService, RecordService, SettingsService, SendOptions, BeforeSendResult, RecordAuthResponse, AuthProviderInfo, AuthMethodsList, RecordSubscription, OAuth2UrlCallback, OAuth2AuthConfig, OnStoreChangeFunc, UnsubscribeFunc, BaseQueryParams, ListQueryParams, RecordQueryParams, RecordListQueryParams, LogStatsQueryParams, FileQueryParams, FullListQueryParams, RecordFullListQueryParams };
+export { SendOptions, BeforeSendResult, Client as default };

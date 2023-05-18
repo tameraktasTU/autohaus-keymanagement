@@ -1,3 +1,25 @@
+## 0.14.4
+
+- Removed the legacy aliased `BaseModel.isNew` getter since it conflicts with similarly named record fields ([pocketbase#2385](https://github.com/pocketbase/pocketbase/discussions/2385)).
+  _This helper is primarly used in the Admin UI, but if you are also using in your code, it is advised to replace it with the `$` prefixed version, aka. `BaseModel.$isNew`._
+
+
+## 0.14.3
+
+- Added `OAuth2AuthConfig.query` prop to send optional query parameters with the `authWithOAuth2(config)` call.
+
+
+## 0.14.2
+
+- Use `location.origin + location.pathname` instead of full `location.href` when constructing the browser absolute url to ignore any extra hash or query parameter passed to the base url.
+  _This is a small addition to the earlier change from v0.14.1._
+
+
+## 0.14.1
+
+- Use an absolute url when the SDK is initialized with a relative base path in a browser env to ensure that the generated OAuth2 redirect and file urls are absolute.
+
+
 ## 0.14.0
 
 - Added simplified `authWithOAuth2()` version without having to implement custom redirect, deeplink or even page reload:
