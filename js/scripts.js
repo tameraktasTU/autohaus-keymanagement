@@ -227,3 +227,29 @@ function displayFahrtenPage() {
         keysTab.classList.remove("is-active");
     }
 }
+
+// QR-Code Reader
+const html5QrCode = new Html5Qrcode("reader");
+const qrCodeSuccessCallback = async (decodedText, decodedResult) => {
+    const key = await client.collection("keys").getOne(decodedText)
+    console.log(key);
+    currentKey = key;
+    stopQRCodeScanner();
+    location.href = "overview.html"
+};
+const config = { fps: 20, aspectRatio: 1.0, qrbox: { width: 250, height: 250 } };
+
+// If you want to prefer front camera
+html5QrCode.start({ facingMode: "user" }, config, qrCodeSuccessCallback);
+
+function stopQRCodeScanner() {
+    html5QrCode.stop().then((ignore) => {
+        // QR Code scanning is stopped.
+    }).catch((err) => {
+        // Stop failed, handle it.
+    });
+}
+
+function openQR() {
+    location.href = "qr.html"
+}
